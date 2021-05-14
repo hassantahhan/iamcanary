@@ -13,7 +13,7 @@ The Lambda function has no external dependencies other than Python 3.8. The Lamb
 The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the (source_arn) to your principal arn designated for testing. 
 
 ## Cost
-The total cost of the Lambda function is estimated to be $0.01 USD/month, when the Lambda free usage tier is not included. 
+The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included. 
 
 ## Output
 The Lambda function will throuw an exception when the canary test fails. Consider triggering the Lambda function periodically, creating a CloudWatch alarm, and configuring a notification email when the canary fails. The serverless.yml file will help you automatically configure these three steps. You will need to change the principal source arn and action list and add your email in the serverless.yml.
