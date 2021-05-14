@@ -3,7 +3,7 @@ Do you need to deploy a test canary into your AWS account to be notified when ce
 
 This repository offers a simple Lambda function to routinely test IAM permissions using the IAM policy simulator API. This API performs a dry-run simulation by only returning whether the requested actions would be allowed or denied without actually running any of the actions.<br/> 
 
-The Lambda function demonstrates an examplatory implementation of an IAM canary concept. You can modify the code to implement a reverse canary which tests when a permission is accidentally extended. In this case, the canary routinely attempts particular API actions that should be denied.<br/> 
+The Lambda function demonstrates an examplatory implementation of an IAM canary concept. You can modify the code to implement a reverse canary test which simulates when a permission is accidentally extended. In this case, the canary routinely attempts particular API actions that should be denied.<br/> 
 
 ## Deployment
 I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source arn and action list and also include your notification email address.<br/>
