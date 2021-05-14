@@ -16,4 +16,4 @@ The core logic (other than the handler method) can be tested locally without the
 The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included. 
 
 ## Output
-The Lambda function will throuw an exception when the canary test fails. Consider triggering the Lambda function periodically, creating a CloudWatch alarm, and configuring a notification email when the canary fails. The serverless.yml file will help you automatically configure these three steps. You will need to change the principal source arn and action list and add your email in the serverless.yml.
+The Lambda function will throw an exception when the canary test fails. I suggest to consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification email when the canary fails. The serverless.yml file is provided to help you automatically configure these three steps. When deploying using the serverless.yml file, you need to update the principal source arn and action list and also include your notification email address.
