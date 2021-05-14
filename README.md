@@ -1,7 +1,7 @@
 ## Overview
 Do you need to deploy a canary into your AWS account to test when certain IAM actions succeed? Are you concerned about sudden changes to permission boundaries impacting your workloads? Do you need a tool to help you discover concerning misconfigurations such as changes to AWS Organizations Service Control Policies (SCPs) not in your control?<br/>
 
-The Lambda funtion tool tests IAM policies using the IAM policy simulator API, which performs a dry-run and does not simulate running the selected actions and only returns whether the requested action would be allowed or denied.<br/> 
+The Lambda function tool tests IAM policies using the IAM policy simulator API, which performs a dry-run and does not simulate running the selected actions and only returns whether the requested action would be allowed or denied.<br/> 
 
 ## Deployment
 I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source arn and action list and also include your notification email address.<br/>
