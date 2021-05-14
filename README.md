@@ -2,7 +2,7 @@
 Do you need to deploy a canary into your AWS account to test when certain IAM actions succeed? Are you concerned about sudden changes to permission boundaries impacting your workloads? Do you need a tool to help you discover concerning misconfigurations such as changes to AWS Organizations Service Control Policies (SCPs) not in your control?<br/>
 
 ## Deployment
-I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation.<br/>
+I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source arn and action list and also include your notification email address.<br/>
 Alternatively, you can follow the link below to deploy the Lambda function as a .zip file archive.<br/>
 Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
 
