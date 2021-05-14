@@ -3,6 +3,8 @@ Do you need to deploy a canary into your AWS account to test when certain IAM ac
 
 The Lambda function tool tests IAM policies using the IAM policy simulator API, which performs a dry-run and does not simulate running the selected actions and only returns whether the requested action would be allowed or denied.<br/> 
 
+The Lambda function demonstrates a concept which be reversed to test when a permission is accedentaly extended. In this case, the canary routinely attempts particular API actions that should be denied.<br/> 
+
 ## Deployment
 I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source arn and action list and also include your notification email address.<br/>
 
