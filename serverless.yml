@@ -1,0 +1,51 @@
+service: IAMCanary
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-plugin-aws-alerts
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: ap-southeast-2
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - iam:SimulatePrincipalPolicy
+            - iam:SimulateCustomPolicy
+          Resource: '*'
+
+functions:
+  checkPrincipal:
+    description: Check permissions allowed to IAM users, roles, and groups
+    handler: handler.handler
+    package:
+      include:
+        - handler.py
+    timeout: 10
+    events:
+      - schedule: rate(1 minute)
+    environment:
+      source_arn: arn:aws:iam::111111111111:role/Admin # Change this to test principal arn
+      action_names: ec2:RunInstances,imagebuilder:CreateImagePipeline # Change this to your comma separated list of actions 
+
+custom:
+  alerts:
+    topics:
+      alarm:
+        topic: ${self:service}-alerts-alarm
+        notifications:
+          - protocol: email
+            endpoint: name@domain.com # Change this to your email address
+    alarms:
+      - functionErrors
