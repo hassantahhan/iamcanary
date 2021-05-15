@@ -1,9 +1,9 @@
 ## Overview
-Do you need to deploy a test canary into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need a tool to help you discover specific concerning misconfigurations not in your control such as overly restrictive AWS Organizations Service Control Policies (SCPs)?<br/>
+Do you need to deploy a canary test into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need to detect access misconfigurations not in your control such as overly restrictive AWS Organizations Service Control Policies (SCPs)?<br/>
 
-This repository offers a simple Lambda function to routinely test IAM permissions using the IAM policy simulator API. This API performs a dry-run simulation by only returning whether the requested actions would be allowed or denied without actually running any of the actions.<br/> 
+This repository offers a simple Lambda function to routinely test IAM permissions using the IAM policy simulator API. This API performs a dry-run simulation by returning whether the requested actions would be allowed or denied without actually running any of the actions.<br/> 
 
-The Lambda function demonstrates an examplatory implementation of an IAM canary concept. You can modify the code to implement a reverse canary test which simulates when a permission is accidentally extended. In this case, the canary routinely attempts particular API actions that should be denied.<br/> 
+The Lambda function demonstrates an examplatory implementation of an IAM canary test concept. You can modify the code to implement a reverse canary test which checks when a permission is accidentally extended. In this case, the canary test routinely attempts particular API actions that should be denied.<br/> 
 
 ## Deployment
 I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source identifier and action list and also include your notification email address.<br/>
@@ -21,4 +21,4 @@ The core logic (other than the handler method) can be tested locally without the
 The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included. 
 
 ## Output
-The Lambda function will throw an exception when the canary test fails. I suggest to consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification email when the canary fails. The serverless.yml file is provided to help you automatically configure these three steps with default values. When deploying using the serverless.yml file, you need to update the principal source identifier and action list and also include your notification email address.
+The Lambda function will throw an exception when the canary test fails. I suggest to consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification email when the canary test fails. The serverless.yml file is provided to help you automatically configure these three steps with default values. When deploying using the serverless.yml file, you need to update the principal source identifier and action list and also include your notification email address.
