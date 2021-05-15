@@ -22,13 +22,24 @@ provider:
         - Effect: Allow
           Action:
             - iam:SimulatePrincipalPolicy
-            - iam:SimulateCustomPolicy
           Resource: '*'
 
 functions:
-  checkPrincipal:
-    description: Check permissions allowed to IAM users, roles, and groups
-    handler: handler.handler
+  checkPrincipalAllowed:
+    description: Check if actions assigned to an IAM user, role, or group are allowed
+    handler: handler.canary_test_allowed
+    package:
+      include:
+        - handler.py
+    timeout: 10
+    events:
+      - schedule: rate(1 minute)
+    environment:
+      source_arn: arn:aws:iam::111111111111:role/Admin # Change this to test principal arn
+      action_names: ec2:RunInstances,imagebuilder:CreateImagePipeline # Change this to your comma separated list of actions 
+  checkPrincipalDenied:
+    description: Check if actions assigned to an IAM user, role, or group are denied
+    handler: handler.canary_test_denied
     package:
       include:
         - handler.py
