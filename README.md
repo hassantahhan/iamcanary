@@ -3,7 +3,7 @@ Do you need to deploy a canary test into your AWS account to be notified when ce
 
 This repository offers two simple Lambda functions to routinely test IAM permissions using the IAM Policy Simulator API. The IAM Policy Simulator performs a dry-run simulation by returning whether the requested actions would be allowed or denied without actually running any of the actions. The two Lambda functions demonstrate how to implement IAM canary tests to check for "Allow" and "Deny" effects. You can configure one or both canary tests to routinely simulates particular IAM actions that should be all allowed or all denied.<br/> 
 
-## Implementation
+## Concept
 Canary testing in general is a way to reduce risk. This canary test helps you detect the effect of certain actions defined in AWS IAM policies which can be overly permissive or restrictive introducing risk into your environment. A correct canary test implementation should trigger a failed notification when a test run programmatically raises an exception (such as action shold not be allowed) or throws an error outside the Lambda function (such as lack of access to underlying resources).<br/> 
 
 ## Deployment
