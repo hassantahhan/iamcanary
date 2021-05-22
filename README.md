@@ -1,5 +1,5 @@
 ## Overview
-Do you need to deploy a canary test into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need to detect IAM access misconfigurations not in your control such as overly restrictive AWS Organizations Service Control Policies (SCPs)?<br/>
+Do you need to deploy a canary test into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need to detect IAM access misconfigurations such as overly restrictive AWS Organizations Service Control Policies (SCPs)?<br/>
 
 This repository offers two simple Lambda functions to routinely test IAM permissions using the IAM Policy Simulator API. The IAM Policy Simulator performs a dry-run simulation by returning whether the requested actions would be allowed or denied without actually running any of the actions. The two Lambda functions demonstrate how to implement IAM canary tests to check for "Allow" and "Deny" effects. You can configure one or both canary tests to routinely simulate particular IAM actions that should be all allowed or all denied.<br/> 
 
@@ -27,6 +27,6 @@ The core logic (other than the handler method) can be tested locally without the
 The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included. 
 
 ## Output
-The Lambda function will stop execution and throw an exception when the canary test fails for any of the principal actions provided. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. For the IAM canary test to be effective, you need to automate both the test run and failure response.
+The Lambda function will stop execution and throw an exception when the canary test fails for any of the principal actions provided. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. For the IAM canary test to be effective, you need to automate both the test run and failure response.<br/>
 
 The serverless.yml file is provided to help you automatically configure these three steps with default values. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.
