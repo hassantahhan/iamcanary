@@ -16,8 +16,8 @@ Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
 The Lambda function has no external dependencies other than Python 3.8. The Lambda requires access to action (iam:SimulatePrincipalPolicy) to run. The suggested timeout limit is 10 seconds. The function must be configured with one environment variable (principals_actions_json), which is a json document of two object types. The Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the test such as (arn:aws:iam::111111111111:role/MyAdminRole). The second onbject is a list of action names in comma separated format of service identifiers and API operations to evaluate in the test such as (iam:CreateUser,iam:CreateAccessKey). The overall json document can look as follows.
 ```
 {
-   "arn:aws:iam::111111111111:role/Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
-   "arn:aws:iam::111111111111:role/Read": "ec2:RunInstances"
+   "arn:aws:iam::111111111111:role/EC2Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
+   "arn:aws:iam::111111111111:role/Ec2Run": "ec2:RunInstances"
 }
 ```
 ## Testing
