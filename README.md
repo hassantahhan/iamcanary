@@ -1,5 +1,5 @@
 ## Overview
-Do you need to deploy a canary test into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need to detect IAM access misconfigurations such as overly restrictive AWS Organizations Service Control Policies (SCPs)?<br/>
+Do you need to deploy a canary test into your AWS account to be notified when certain IAM actions do not succeed? Are you concerned about sudden changes to IAM permission boundaries impacting your workloads? Do you need to detect IAM access misconfigurations in AWS Organizations Service Control Policies (SCPs)?<br/>
 
 This repository offers two Lambda functions to routinely test IAM permissions using the IAM Policy Simulator API. The two Lambda functions demonstrate how to implement IAM canary tests to check for "Allow" and "Deny" effects. You can configure one or both canary tests to routinely simulate particular IAM actions that should be all allowed or all denied.<br/> 
 
