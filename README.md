@@ -7,6 +7,9 @@ This repository offers two Lambda functions to routinely test IAM permissions us
 Canary testing in general is a way to reduce risk. This canary test helps you detect the effect of certain actions defined in AWS IAM policies which can be overly permissive or restrictive introducing risk into your environment. The IAM Policy Simulator is used to perform a dry-run simulation by returning whether the requested actions would be allowed or denied without actually running any of the actions. The canary test implementation should trigger a failed notification when a test run programmatically raises an exception (such as an action should not be allowed) or throws an error outside the Lambda function (such as lack of access to underlying resources). To achieve this, the default error metric of Lambda functions available in Amazon CloudWatch can be used to detect test run failures and trigger notifications.
 ![Screenshot](concept.png)
 
+## Output
+The Lambda function will stop execution and throw an exception when the canary test fails for any of principal or action provided. For the IAM canary test to be effective, you need to automate both the test run and failure response. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. <br/>
+
 ## Deployment
 I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml file for your reference. However, you can choose to deploy using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
 
@@ -24,10 +27,7 @@ The functions must be configured with one environment variable (principals_actio
 }
 ```
 ## Testing
-The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the test variables to match your environment. 
+The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the test variables to match your environment. <br/>
 
 ## Cost
-The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included. 
-
-## Output
-The Lambda function will stop execution and throw an exception when the canary test fails for any of principal or action provided. For the IAM canary test to be effective, you need to automate both the test run and failure response. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. <br/>
+The total cost of the Lambda function is estimated to be less than $1 USD/month, when the Lambda and CloudWatch free usage tiers are not included.
