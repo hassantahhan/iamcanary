@@ -8,7 +8,7 @@ Canary testing in general is a way to reduce risk. This canary test helps you de
 ![Screenshot](concept.png)
 
 ## Deployment
-I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When using the serverless.yml file, update the principal source identifier and action list and also include your notification email address.<br/>
+I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml for your reference. However, you can choose to deployed using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
 
 Alternatively, you can follow the link below to deploy the Lambda function as a .zip file archive.<br/>
 Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
@@ -29,5 +29,3 @@ The total cost of the Lambda function is estimated to be less than $1 USD/month,
 
 ## Output
 The Lambda function will stop execution and throw an exception when the canary test fails for any of the principal actions provided. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. For the IAM canary test to be effective, you need to automate both the test run and failure response.<br/>
-
-The serverless.yml file is provided to help you automatically configure these three steps with default values. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.
