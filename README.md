@@ -14,7 +14,9 @@ Alternatively, you can follow the link below to deploy the Lambda function as a 
 Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
 
 ## Environment
-The Lambda functions have no external dependencies other than Python 3.8. The Lambda functions require access to action (iam:SimulatePrincipalPolicy) to run. The suggested timeout limit is 10 seconds. The functions must be configured with one environment variable (principals_actions_json), which is a JSON structure of two types and a maximum of 4000 characters. The first type is an Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the test such as (arn:aws:iam::111111111111:role/MyAdmin). The second type is a list of action names of service identifiers and API operations in comma separated format to be evaluated such as (iam:CreateUser,iam:CreateAccessKey). The document below is provided an example of the input JSON.
+The Lambda functions have no external dependencies other than Python 3.8 and Boto3, which is the AWS Python SDK. The Lambda functions require access to action (iam:SimulatePrincipalPolicy) to run and the suggested timeout is 10 seconds.<br/>
+
+The functions must be configured with one environment variable (principals_actions_json), which is a one-level JSON structure of key/value pairs and a maximum of 4000 characters. The key is an Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the test such as (arn:aws:iam::111111111111:role/MyAdmin). The value is a list of action names (service identifiers and API operations) in comma separated format to be evaluated such as (iam:CreateUser,iam:CreateAccessKey). The document below is provided as an example of the input JSON structure.
 ```
 {
    "arn:aws:iam::111111111111:role/EC2Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
