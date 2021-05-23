@@ -10,12 +10,6 @@ Canary testing in general is a way to reduce risk. This canary test helps you de
 ## Output
 The Lambda function will stop execution and throw an exception when the canary test fails for any of principal or action provided. For the IAM canary test to be effective, you need to automate both the test run and failure response. Consider triggering the Lambda function periodically, creating a CloudWatch alarm for the lambda function error metric, and configuring a notification event when the canary test fails such as an email message. <br/>
 
-## Deployment
-I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml file for your reference. However, you can choose to deploy using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
-
-Alternatively, you can follow the link below to deploy the Lambda function as a .zip file archive.<br/>
-Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
-
 ## Environment
 The Lambda functions have no external dependencies other than Python 3.8 and Boto3, which is the AWS Python SDK. The Lambda functions require access to action (iam:SimulatePrincipalPolicy) to run and the suggested timeout is 10 seconds.<br/>
 
@@ -26,6 +20,12 @@ The functions must be configured with one environment variable (principals_actio
    "arn:aws:iam::111111111111:role/Ec2Run": "ec2:RunInstances"
 }
 ```
+## Deployment
+I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml file for your reference. However, you can choose to deploy using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
+
+Alternatively, you can follow the link below to deploy the Lambda function as a .zip file archive.<br/>
+Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
+
 ## Testing
 The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the test variables to match your environment. <br/>
 
