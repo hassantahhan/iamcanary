@@ -17,7 +17,7 @@ The functions must be configured with one environment variable (principals_actio
 ```
 {
    "arn:aws:iam::111111111111:role/EC2Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
-   "arn:aws:iam::111111111111:role/Ec2Run": "ec2:RunInstances"
+   "arn:aws:iam::111111111111:role/EC2Run": "ec2:RunInstances"
 }
 ```
 ## Deployment
