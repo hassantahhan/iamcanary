@@ -25,9 +25,9 @@ provider:
           Resource: '*'
 
 functions:
-  checkPrincipalAllowed:
-    description: Check if actions assigned to an IAM users, roles, or groups are allowed
-    handler: handler.canary_test_allowed
+  checkPrincipalsActions:
+    description: Check actions assigned to an IAM users, roles, or groups
+    handler: handler.check_principals_actions
     package:
       include:
         - handler.py
@@ -35,19 +35,8 @@ functions:
     events:
       - schedule: rate(1 minute)
     environment:
-      principals_actions_json: '{"arn:aws:iam::111111111111:role/Admin":"ec2:RunInstances"}' # Change this to match your requirements 
-  checkPrincipalDenied:
-    description: Check if actions assigned to an IAM users, roles, or groups are denied
-    handler: handler.canary_test_denied
-    package:
-      include:
-        - handler.py
-    timeout: 10
-    events:
-      - schedule: rate(1 minute)
-    environment:
-      principals_actions_json: '{"arn:aws:iam::111111111111:role/Read":"ec2:RunInstances"}' # Change this to match your requirements
-
+      principals_actions_json: '{"allowed_pairs": {"arn:aws:iam::111111111111:role/EC2Run":"ec2:RunInstances"}}' # Change this to match your requirements 
+  
 custom:
   alerts:
     topics:
