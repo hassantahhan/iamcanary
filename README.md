@@ -16,8 +16,13 @@ The Lambda functions have no external dependencies other than Python 3.8 and Bot
 The functions must be configured with one environment variable (principals_actions_json), which is a one-level JSON structure of key/value pairs and a maximum of 4000 characters. The key is an Amazon Resource Name (ARN) of a user, group, or role whose policies you want to include in the test such as (arn:aws:iam::111111111111:role/MyAdmin). The value is a list of action names (service identifiers and API operations) in comma separated format to be evaluated such as (iam:CreateUser,iam:CreateAccessKey). The document below is provided as an example of the input JSON structure.
 ```
 {
-   "arn:aws:iam::111111111111:role/EC2Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
-   "arn:aws:iam::111111111111:role/EC2Run": "ec2:RunInstances"
+    "allowed_pairs": {
+        "arn:aws:iam::111111111111:role/EC2Admin": "ec2:RunInstances,imagebuilder:CreateImagePipeline",
+        "arn:aws:iam::111111111111:role/EC2Run": "ec2:RunInstances"
+    },
+    "denied_pairs": {
+        "arn:aws:iam::111111111111:role/EC2Run": "imagebuilder:CreateImagePipeline"
+    }
 }
 ```
 ## Deployment
