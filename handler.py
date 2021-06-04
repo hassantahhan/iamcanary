@@ -26,7 +26,7 @@ def read_and_simulate_principals_actions():
     for key in denied_pairs:
         simulate_principal_actions(key, denied_pairs[key], False)
 
-    return "Completed test of " + str(len(allowed_pairs)) + " allowed pairs and " + str(len(denied_pairs)) + " denied pairs"     
+    return "Completed test of " + str(len(allowed_pairs)) + " allowed pair(s) and " + str(len(denied_pairs)) + " denied pair(s)"     
     
 # check if one principal is allowed (effect_allow = true) or denied (effect_allow = false) on all actions
 def simulate_principal_actions(principal_arn, action_names, effect_allow):
