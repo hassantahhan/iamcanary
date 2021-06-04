@@ -2,11 +2,11 @@ import os
 import json
 import boto3
 
-# lambda handler for canary test of allowed and denied actions 
+# lambda handler for canary test of allowed and denied principles actions 
 def check_principals_actions(event, context): 
     return read_and_simulate_principals_actions()
 
-# check by order if all principals have the allowed or denied effect on all actions
+# read effects, principles, and actions to check IAM entity permissions
 def read_and_simulate_principals_actions():
     input_json = os.environ.get("principals_actions_json")
     dictionary = json.loads(input_json)
@@ -26,7 +26,7 @@ def read_and_simulate_principals_actions():
     for key in denied_pairs:
         simulate_principal_actions(key, denied_pairs[key], False)
 
-    return "Completed test of " + str(len(allowed_pairs)) + " allowed principal-actions pairs and " + str(len(denied_pairs)) + " denied principal-actions pairs"     
+    return "Completed test of " + str(len(allowed_pairs)) + " allowed pairs and " + str(len(denied_pairs)) + " denied pairs"     
     
 # check if one principal is allowed (effect_allow = true) or denied (effect_allow = false) on all actions
 def simulate_principal_actions(principal_arn, action_names, effect_allow):
