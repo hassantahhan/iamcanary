@@ -27,7 +27,7 @@ provider:
 functions:
   checkPrincipalsActions:
     description: Check actions assigned to an IAM users, roles, or groups
-    handler: handler.check_principals_actions
+    handler: handler.lambda_handler
     package:
       include:
         - handler.py

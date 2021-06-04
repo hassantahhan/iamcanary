@@ -3,7 +3,7 @@ import json
 import boto3
 
 # lambda handler for canary test of allowed and denied principles actions 
-def check_principals_actions(event, context): 
+def lambda_handler(event, context): 
     return read_and_simulate_principals_actions()
 
 # read effects, principles, and actions to check IAM entity permissions
