@@ -6,8 +6,9 @@ import boto3
 def lambda_handler(event, context): 
     return read_and_simulate_principals_actions()
 
-# read effects, principles, and actions to check IAM entity permissions
+# read effects, principles, and actions to simulate IAM entity permissions
 def read_and_simulate_principals_actions():
+    # read input json format
     input_json = os.environ.get("principals_actions_json", "{}")
     dictionary = json.loads(input_json)
     allowed_pairs = dict()
@@ -17,13 +18,14 @@ def read_and_simulate_principals_actions():
         allowed_pairs = dictionary["allowed_pairs"]
 
     if "denied_pairs" in dictionary:
-        denied_pairs = dictionary["denied_pairs"]    
+        denied_pairs = dictionary["denied_pairs"]
+
+    # test denied before allowed pairs
+    for key in denied_pairs:
+        simulate_principal_actions(key, denied_pairs[key], False)
 
     for key in allowed_pairs:
         simulate_principal_actions(key, allowed_pairs[key], True)
-
-    for key in denied_pairs:
-        simulate_principal_actions(key, denied_pairs[key], False)
 
     return "Completed test of " + str(len(allowed_pairs)) + " allowed pair(s) and " + str(len(denied_pairs)) + " denied pair(s)"     
     
