@@ -8,19 +8,20 @@ def lambda_handler(event, context):
 
 # read effects, principles, and actions to simulate IAM entity permissions
 def read_and_simulate_principals_actions():
-    # read input json format
+    # read json and initialize dictionaries
     input_json = os.environ.get("principals_actions_json", "{}")
     dictionary = json.loads(input_json)
-    allowed_pairs = dict()
-    denied_pairs = dict()
 
-    if "allowed_pairs" in dictionary:
-        allowed_pairs = dictionary["allowed_pairs"]
+    denied_pairs = dict()
+    allowed_pairs = dict()
 
     if "denied_pairs" in dictionary:
         denied_pairs = dictionary["denied_pairs"]
 
-    # test denied before allowed pairs
+    if "allowed_pairs" in dictionary:
+        allowed_pairs = dictionary["allowed_pairs"]
+
+    # test denied pairs before allowed pairs
     for key in denied_pairs:
         simulate_principal_actions(key, denied_pairs[key], False)
 
