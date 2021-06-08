@@ -25,17 +25,18 @@ provider:
           Resource: '*'
 
 functions:
-  checkPrincipalsActions:
+  CheckPrincipalsActions:
     description: Check actions assigned to an IAM users, roles, or groups
     handler: handler.lambda_handler
     package:
       include:
         - handler.py
+    memorySize: 128
     timeout: 10
     events:
       - schedule: rate(1 minute)
     environment:
-      principals_actions_json: '{"allowed_pairs": {"arn:aws:iam::111111111111:role/EC2Run":"ec2:RunInstances"}}' # Change this to match your requirements 
+      principals_actions_json: '{}' # Change this to match your test case(s) 
   
 custom:
   alerts:
