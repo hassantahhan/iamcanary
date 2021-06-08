@@ -26,10 +26,7 @@ The function must be configured with one environment variable (principals_action
 }
 ```
 ## Deployment
-I deployed the Lambda function in my AWS test account using https://www.serverless.com/ and provided the serverless.yml file for your reference. However, you can choose to deploy using any other preferred option such as AWS CodeDeploy or AWS CloudFormation. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
-
-Alternatively, you can follow the link below to deploy the Lambda function as a .zip file archive.<br/>
-Reference link: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html
+You can deployed the Lambda function via https://aws.amazon.com/cloudformation/ (use the cloudformation.yml file) or https://www.serverless.com/ (use the serverless.yml file). You can also choose to deploy using any other preferred option such as AWS CodeDeploy or AWS CDK. When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
 
 ## Testing
 The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the test variables to match your environment. <br/>
