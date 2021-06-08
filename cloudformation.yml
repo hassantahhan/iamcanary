@@ -78,7 +78,7 @@ Resources:
       Handler: index.lambda_handler
       Runtime: python3.8
       Role: !GetAtt 'CheckPrincipalsActionsLambdaRole.Arn'
-      memorySize: 128
+      MemorySize: 128
       Timeout: 10
       Environment:
         Variables:
