@@ -1,7 +1,7 @@
 
-# Welcome to IAM Canary project!
+# Welcome to IAM Canary AWS CDK Deployment!
 
-This is project demonstrates how to monitor IAM permissions by building a canary which uses the IAM Policy Simulator API to test IAM policies regularly. 
+This is project demonstrates how to use AWS Cloud Development Kit (CDK) to build a solution for an IAM canary to test IAM policies regularly. 
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
