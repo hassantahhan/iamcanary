@@ -26,7 +26,7 @@ The function must be configured with one environment variable (principals_action
 }
 ```
 ## Deployment
-You can deployed the Lambda function via https://aws.amazon.com/cloudformation/ (usring the cloudformation.yml file), https://docs.aws.amazon.com/cdk/ (usring the iam-canary-cdk folder), or https://www.serverless.com/ (using the serverless.yml file). When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
+You can deployed the Lambda function via https://aws.amazon.com/cloudformation/ (using the cloudformation.yml file), https://docs.aws.amazon.com/cdk/ (using the iam-canary-cdk folder), or https://www.serverless.com/ (using the serverless.yml file). When deploying using the serverless.yml file, you need to update the principals_actions_json variable to match your requirements and also include your notification email address.<br/>
 
 ## Testing
 The core logic (other than the handler method) can be tested locally without the need for Lambda deployment. I provided two files (test.py and requirements.txt) to help you install and run the IAM canary check locally. You still need to have your AWS access credentials in .aws\credentials for the test script to work. Make sure to change the test variables to match your environment. <br/>
