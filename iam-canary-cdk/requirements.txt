@@ -1,0 +1,9 @@
+aws_cdk.aws_cloudwatch
+aws_cdk.aws_cloudwatch_actions
+aws_cdk.aws_events
+aws_cdk.aws_events_targets
+aws_cdk.aws_iam
+aws_cdk.aws_lambda
+aws_cdk.aws_sns
+aws_cdk.aws_sns_subscriptions
+aws-cdk.core
