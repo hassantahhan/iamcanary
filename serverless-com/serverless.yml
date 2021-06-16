@@ -1,0 +1,50 @@
+service: IAMCanary
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-plugin-aws-alerts
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: ap-southeast-2
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - iam:SimulatePrincipalPolicy
+          Resource: '*'
+
+functions:
+  CheckPrincipalsActions:
+    description: Check actions assigned to an IAM users, roles, or groups
+    handler: handler.lambda_handler
+    package:
+      include:
+        - handler.py
+    memorySize: 128
+    timeout: 10
+    events:
+      - schedule: rate(1 minute)
+    environment:
+      principals_actions_json: '{}' # Change this to match your test case(s) 
+  
+custom:
+  alerts:
+    topics:
+      alarm:
+        topic: ${self:service}-alerts-alarm
+        notifications:
+          - protocol: email
+            endpoint: name@domain.com # Change this to your email address
+    alarms:
+      - functionErrors
